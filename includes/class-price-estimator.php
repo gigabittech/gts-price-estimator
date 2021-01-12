@@ -158,8 +158,12 @@ class Price_Estimator {
 		$this->loader->add_action( 'admin_enqueue_style', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );	
 		$this->loader->add_action( 'init', $plugin_admin, 'price_estimator');
-		$this->loader->add_action( 'init', $plugin_admin, 'price_estimator_taxonomy');	
-
+		$this->loader->add_action( 'init', $plugin_admin, 'price_estimator_taxonomy');
+		/*$this->loader->add_action( 'price_estimator_cat_add_form_fields', $plugin_admin, 'category_fields_new' );
+		$this->loader->add_action( 'price_estimator_cat_edit_form_fields', $plugin_admin, 'category_fields_edit');
+		$this->loader->add_action ( 'created_price_estimator_cat', $plugin_admin, 'save_category_fields' );
+		$this->loader->add_action ( 'edited_price_estimator_cat', $plugin_admin, 'save_category_fields' );
+		$this->loader->add_action ( 'pre_delete_term', $plugin_admin, 'remove_term_options' );*/
 
 	}
 

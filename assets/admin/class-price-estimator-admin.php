@@ -181,7 +181,4 @@ function price_estimator_taxonomy() {
   register_taxonomy( 'price_estimator_cat', 'price_estimator', $args );
 }
 
-//add_action( 'init', 'thenobility_custom_post_taxonomy');
-//add_action( 'init', 'custom_post_type', 0 );
-
 }
