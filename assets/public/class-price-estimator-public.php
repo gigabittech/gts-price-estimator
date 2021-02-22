@@ -101,33 +101,33 @@ class Price_Estimator_Public {
 
 		wp_enqueue_script( 'bootstrap-min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( 'shopkart', plugin_dir_url( __FILE__ ) . 'js/shopkart.js', array( 'jquery' ), $this->version, true );
-		wp_enqueue_script( "price-estimator-public", plugin_dir_url( __FILE__ ) . 'js/price-estimator-public.js', array( 'jquery' ), $this->version, true );		
-
+		wp_enqueue_script( "price-estimator-public", plugin_dir_url( __FILE__ ) . 'js/price-estimator-public.js', array( 'jquery' ), $this->version, true );
 	}
 
 //Slider ShortCode Function
 public function price_estimator_shortcode($args) {
+    $popup_setting_options = get_option( 'popup_setting_option_name' ); // Array of All Options
+    $popup_class_id = $popup_setting_options['price_estimate_form_class_id']; //
 ?>
 <!-- Pricing Area Start -->
 <section class="pricing">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 pb-5">
-                <h3>Pricing Estimator</h3>
-            </div>
+        <div class="row">            
             <div class="col-lg-4 col-md-6">
                 <h3>Step 1: Enter zip code</h3>
             </div>
-
             <div class="col-lg-4 col-md-6">
+                 <div class="alert-message" style="display: none;">
+                     <h4>Please enter valid zip code.</h6>
+                 </div>                
                 <form>
                     <div class="form-row">
-                        <form method="post">
+                        <form method="post" id="myForm">
                             <div class="col-auto">
-                                <input id="usa_zip_code" class="form-control mb-2 zipcode_1 postal-code" type="text" value="" maxlength="7" placeholder="Jane Doe">
+                                <input id="pe-zip-input" class="form-control mb-2 zipcode_1 postal-code" type="text" value="" maxlength="7" placeholder="Jane Doe">
                             </div>
                             <div class="col-auto">
-                                <button id="usa_zip" type="button" class="btn btn-primary mb-2" value="Go">Go</button>
+                                <button id="pe-zip-submit-btn" type="button" name="submit" class="btn btn-primary mb-2" value="Go">Go</button>
                             </div>
                         </form>
                     </div>
@@ -147,7 +147,7 @@ public function price_estimator_shortcode($args) {
         </div>
     </div>
 
-    <div class="row tab-area">
+    <div class="row tab-area" id="disabled-div">
         <div class="col-lg-4 col-md-6">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -161,7 +161,14 @@ public function price_estimator_shortcode($args) {
             <button type="button">Reset</button>
         </div>
         <div class="col-lg-4 col-md-3  text-center button-area">
-            <button type="button" data-toggle="modal" data-target="#exampleModal">Book It</button>
+            <div class="booking-form" style="display:none;">
+                <button class="" type="button" data-toggle="modal" data-target="#exampleModal">Book It</button> 
+
+
+                <!-- button class="<?php
+                echo $popup_class_id;?>" type="button">Book It</button> -->
+
+            </div>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -226,8 +233,8 @@ public function price_estimator_shortcode($args) {
                                 <div class="card-body">
                                     <?php $subterms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false,'parent'=> $term->term_id));
 				                        foreach ($subterms as $key => $value)
-				                        {?>
-                                    <li id="regalo"><?php echo $value->name;?><button data-kart="item-button" data-kart-item-status="add-item" data-kart-item='{"id": <?php echo $value->term_id;?>, "price": <?php echo $value->description;?>}' id="<?php echo $value->slug;?>">Add this item</button><?php }?></li>
+				                    {?>
+                                    <li value="<?php echo $value->name;?>" class="junk-items" style="display:none;"><?php echo $value->name;?><button data-kart="item-button" data-kart-item-status="add-item" data-kart-item='{"id": <?php echo $value->term_id;?>, "price": <?php echo $value->description;?>}' id="<?php echo $value->slug;?>">Add this item</button><?php }?></li>
                                 </div>
                             </div>
                         </div>

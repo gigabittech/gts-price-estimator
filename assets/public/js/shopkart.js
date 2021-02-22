@@ -305,19 +305,4 @@
         };
 
     });
-
-    function manageRegalo() {
-        var area_serve = 90004
-    var valid_zip = $("#usa_zip_code").val();
-    // or:
-    //const total = suma();
-    if(valid_zip == area_serve) {
-      $('#regalo').show();
-    }
-    else{
-      $('#regalo').hide();
-    }
-  }
-   
-
 }(jQuery, window);

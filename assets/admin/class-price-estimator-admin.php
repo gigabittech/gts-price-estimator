@@ -72,8 +72,9 @@ class Price_Estimator_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/price-estimator-admin.css', array(), $this->version, 'all' );
+        //wp_enqueue_style('jquery-ui', plugins_url('/css/jquery-ui.css', __FILE__));
+		//wp_enqueue_style( 'ui', plugin_dir_url( __FILE__ ) . 'css/jquery-ui.css', array(), $this->version, 'aldl' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/price-estimator-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -95,8 +96,9 @@ class Price_Estimator_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/price-estimator-admin.js', array( 'jquery' ), $this->version, false );
+        //wp_enqueue_script('jquery-ui-tabs');
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/price-estimator-admin.js', array( 'jquery' ), $this->version, false );        
+        
 
 	}
 
@@ -144,11 +146,11 @@ public function price_estimator() {
         'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => true,
-        'has_archive'           => true,        
-        'publicly_queryable'    => true,
+        'has_archive'           => false,        
+        'publicly_queryable'    => false,
         'capability_type'       => 'page',        
     );
-    register_post_type( 'price_estimator', $args );
+    register_post_type( 'price-estimator', $args );
 
 }
 
@@ -170,7 +172,7 @@ function price_estimator_taxonomy() {
   );
   $args = array(
     'labels' => $labels,
-    'hierarchical' => true,
+    'hierarchical' => true,   
     'query_var'             => true,
     'show_admin_column'     => true,
     'rewrite'               => array(
@@ -178,7 +180,103 @@ function price_estimator_taxonomy() {
                 'with_front'    	=> true 
                 )
   );
-  register_taxonomy( 'price_estimator_cat', 'price_estimator', $args );
+  register_taxonomy( 'price_estimator_cat', 'price-estimator', $args );
 }
+
+function create_topics_nonhierarchical_taxonomy() {
+ 
+// Labels part for the GUI
+  $labels = array(
+    'name'              => _x( 'Popup Option', 'taxonomy general name' ),
+    'singular_name'     => _x( 'Iteml Category', 'taxonomy singular name' ),
+    'search_items'      => __( 'Search lItem Categories' ),
+    'all_items'         => __( 'All Item Categories' ),
+    'parent_item'       => __( 'Parent Item Category' ),
+    'parent_item_colon' => __( 'Parent Item Category:' ),
+    'edit_item'         => __( 'Edit Item Category' ), 
+    'update_item'       => __( 'Update Item Category' ),
+    'add_new_item'      => __( 'Add New Item Category' ),
+    'new_item_name'     => __( 'New Item Category' ),
+    'menu_name'         => __( 'Item Categories' ),
+    
+  );
+  $args = array(
+    'labels' => $labels,
+    'hierarchical' => true,
+    'query_var'             => true,
+    'show_admin_column'     => true,
+    'rewrite'               => array(
+                'slug'              => 'popup_option', 
+                'with_front'        => true 
+                )
+  );
+  register_taxonomy( 'popup_option', 'price-estimator', $args );
+}
+    private $popup_setting_options;
+    public function price_estimat_form_setting() {
+        add_submenu_page( 'edit.php?post_type=price-estimator', 'Settings', 'Settings', 'manage_options', 'price-estimator-setting', array(&$this, 'popup_setting_create_admin_page'));
+        
+    }
+
+    public function popup_setting_create_admin_page() {
+        $this->popup_setting_options = get_option( 'popup_setting_option_name' ); ?>
+
+        <div class="wrap">
+            <h2>Popup Setting</h2>
+
+
+            <?php settings_errors(); ?>
+            <form method="post" action="options.php">
+                <?php
+                    settings_fields( 'popup_setting_option_group' );
+                    do_settings_sections( 'popup-setting-admin' );
+                    submit_button();
+                ?>
+            </form>
+        </div>
+    <?php }
+
+    public function popup_setting_page_init() {
+        register_setting(
+            'popup_setting_option_group', // option_group
+            'popup_setting_option_name', // option_name
+            array( $this, 'popup_setting_sanitize' ) // sanitize_callback
+        );
+
+        add_settings_section(
+            'popup_setting_setting_section', // id
+            '', // Section title
+            array( $this, 'popup_setting_section_info' ), // callback
+            'popup-setting-admin' // page
+        );
+
+        add_settings_field(
+            'price_estimate_form_class_id', // id
+            'Elementor popup Class/Id', // title
+            array( $this, 'price_estimate_form_class_id_callback' ), // callback
+            'popup-setting-admin', // page
+            'popup_setting_setting_section' // section
+        );
+    }
+
+    public function popup_setting_sanitize($input) {
+        $sanitary_values = array();
+        if ( isset( $input['price_estimate_form_class_id'] ) ) {
+            $sanitary_values['price_estimate_form_class_id'] = sanitize_text_field( $input['price_estimate_form_class_id'] );
+        }
+
+        return $sanitary_values;
+    }
+
+    public function popup_setting_section_info() {        
+    }
+
+    public function price_estimate_form_class_id_callback() {
+        printf(
+            '<input class="regular-text" type="text" name="popup_setting_option_name[price_estimate_form_class_id]" id="price_estimate_form_class_id" value="%s">',
+            isset( $this->popup_setting_options['price_estimate_form_class_id'] ) ? esc_attr( $this->popup_setting_options['price_estimate_form_class_id']) : ''
+        );
+    }
+
 
 }

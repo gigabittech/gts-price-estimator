@@ -116,6 +116,7 @@ class Price_Estimator {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'assets/admin/class-price-estimator-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'assets/admin/plugin-setting.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -155,10 +156,13 @@ class Price_Estimator {
 
 		$plugin_admin = new Price_Estimator_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_style', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );	
 		$this->loader->add_action( 'init', $plugin_admin, 'price_estimator');
 		$this->loader->add_action( 'init', $plugin_admin, 'price_estimator_taxonomy');
+		$this->loader->add_action('admin_menu', $plugin_admin, 'price_estimat_form_setting');
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'popup_setting_page_init');
+		
 		/*$this->loader->add_action( 'price_estimator_cat_add_form_fields', $plugin_admin, 'category_fields_new' );
 		$this->loader->add_action( 'price_estimator_cat_edit_form_fields', $plugin_admin, 'category_fields_edit');
 		$this->loader->add_action ( 'created_price_estimator_cat', $plugin_admin, 'save_category_fields' );
