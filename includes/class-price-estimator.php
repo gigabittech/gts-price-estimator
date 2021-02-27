@@ -115,8 +115,7 @@ class Price_Estimator {
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'assets/admin/class-price-estimator-admin.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'assets/admin/plugin-setting.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'assets/admin/class-price-estimator-admin.php';	
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing

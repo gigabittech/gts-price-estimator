@@ -101,6 +101,7 @@ class Price_Estimator_Public {
 
 		wp_enqueue_script( 'bootstrap-min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( 'shopkart', plugin_dir_url( __FILE__ ) . 'js/shopkart.js', array( 'jquery' ), $this->version, true );
+        wp_enqueue_script( 'cart-localstorage', plugin_dir_url( __FILE__ ) . 'js/cart-localstorage.min.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( "price-estimator-public", plugin_dir_url( __FILE__ ) . 'js/price-estimator-public.js', array( 'jquery' ), $this->version, true );
 	}
 
@@ -114,17 +115,14 @@ public function price_estimator_shortcode($args) {
     <div class="container">
         <div class="row">            
             <div class="col-lg-4 col-md-6">
-                <h3>Step 1: Enter zip code</h3>
+                <h3 class="step-1">Step 1: Enter zip code</h3>
             </div>
-            <div class="col-lg-4 col-md-6">
-                 <div class="alert-message" style="display: none;">
-                     <h4>Please enter valid zip code.</h6>
-                 </div>                
+            <div class="col-lg-4 col-md-6">                              
                 <form>
                     <div class="form-row">
                         <form method="post" id="myForm">
                             <div class="col-auto">
-                                <input id="pe-zip-input" class="form-control mb-2 zipcode_1 postal-code" type="text" value="" maxlength="7" placeholder="Jane Doe">
+                                <input id="pe-zip-input" class="form-control mb-2 zipcode_1 postal-code" type="text" value="" maxlength="7" placeholder="92656">
                             </div>
                             <div class="col-auto">
                                 <button id="pe-zip-submit-btn" type="button" name="submit" class="btn btn-primary mb-2" value="Go">Go</button>
@@ -133,14 +131,17 @@ public function price_estimator_shortcode($args) {
                     </div>
                 </form>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-md-6">
+                 <div class="alert-message" style="display: none;">
+                     <h4>Please enter valid zip code.</h6>
+                 </div> 
             </div>
             <div class="col-lg-10 pt-5 pb-5">
-                <h3>Step 2: Click on your items for a free estimate</h3>
+                <h3 class="step-2">Step 2: Click on your items for a free estimate</h3>
             </div>
             <div class="col-lg-2 pt-5 pb-5">
                 <div class="card-body" data-kart="display">
-                    <div>Total Price: $<span data-kart-total-price="0">0.00</span>
+                    <div><span data-kart-total-price="0"></span>
                     </div>
                 </div>
             </div>
@@ -151,25 +152,24 @@ public function price_estimator_shortcode($args) {
         <div class="col-lg-4 col-md-6">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">By List Item</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">By TruckLoad</a>
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">By List Item</a>                    
                 </div>
             </nav>
         </div>
 
         <div class="col-lg-4 col-md-3 text-center button-area">
-            <button type="button">Reset</button>
+            <button type="button" class="reset_data" onClick="cartLS.destroy()">Reset</button>
         </div>
         <div class="col-lg-4 col-md-3  text-center button-area">
             <div class="booking-form" style="display:none;">
-                <button class="" type="button" data-toggle="modal" data-target="#exampleModal">Book It</button> 
-
-
-                <!-- button class="<?php
-                echo $popup_class_id;?>" type="button">Book It</button> -->
-
+                <?php if (!empty($popup_class_id)){?>
+                    <?php echo do_shortcode($popup_class_id); ?>
+                
+                <?php } else{?>
+                    <button class="" type="button" data-toggle="modal" data-target="#price_form">Book It</button>
+                <?php }?>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="price_form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -178,31 +178,31 @@ public function price_estimator_shortcode($args) {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <h4 class="modal-title text-center" id="exampleModalLabel"> BOOK ONLINE & SAVE $20!*</h4>
+                            <h4 class="modal-title text-center" id="exampleModalLabel">BOOK ONLINE & SAVE $20!*</h4>
                             <p>*excludes jobs $99 and under</p>
-                            <form action="">
+                            <form action="<?php echo plugin_dir_url( __DIR__ ).'public/send.php';?>" method="POST" enctype="multipart/form-data">
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
-                                        <input type="text" class="form-control" placeholder="First & Name Name">
+                                        <input type="text" name="first_last_name" class="form-control" placeholder="First & Name Name">
                                     </div>
                                     <div class="form-group col-md-12">
-                                        <input type="text" class="form-control" placeholder="Address">
+                                        <input type="email" name="email" class="form-control" placeholder="Enter your email">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <input type="number" class="form-control" id="inputEmail4" placeholder="Postal Code">
+                                        <input type="number" name="price_estimate_zip_code" class="form-control" id="price_estimate_zip_code">         
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <input type="number" class="form-control" id="inputEmail4" placeholder="Phone Number">
-                                    </div>
-
-                                    <div class="form-group col-md-12">
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                                    </div>
-                                </div>
+                                        <input type="number" name="phone_number" class="form-control" id="phone_number" placeholder="Phone Number">
+                                    </div>                                          
+                                </div>  
+                                <div class="form-group" data-kart="display">
+                                    <textarea rows="2" data-kart-total-price="" name="total_price">$0.00</textarea>
+                                </div>                             
                                 <div class="form-group">
-                                    <input type="date" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                                    <textarea name="price_estimate_item_name" class="cart" cols="30" rows="6"></textarea>
                                 </div>
+                          </div>
                                 <button type="submit" class="btn">Book IT</button>
                             </form>
                         </div>
@@ -234,7 +234,10 @@ public function price_estimator_shortcode($args) {
                                     <?php $subterms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false,'parent'=> $term->term_id));
 				                        foreach ($subterms as $key => $value)
 				                    {?>
-                                    <li value="<?php echo $value->name;?>" class="junk-items" style="display:none;"><?php echo $value->name;?><button data-kart="item-button" data-kart-item-status="add-item" data-kart-item='{"id": <?php echo $value->term_id;?>, "price": <?php echo $value->description;?>}' id="<?php echo $value->slug;?>">Add this item</button><?php }?></li>
+                                        
+                                    <li value="<?php echo $value->name;?>" class="junk-items reset_data" style="display:none;"><span><?php echo $value->name;?></span>
+                                    <button class="junk-item-btn" data-kart="item-button" data-kart-item-status="add-item" data-kart-item='{"id": <?php echo $value->term_id;?>, "price": <?php echo $value->description;?>}' onClick="cartLS.add({id: <?php echo $value->term_id;?>, name: '<?php echo $value->name;?>', price: <?php echo $value->description;?>})" id="<?php echo $value->slug;?>">Add this item</button><?php }?>
+                                    </li>                                    
                                 </div>
                             </div>
                         </div>
@@ -246,7 +249,8 @@ public function price_estimator_shortcode($args) {
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12 step-3">
+        <div class="cart" ></div>
+        <div class="col-lg-12 step-3">            
             <p>This pricing estimator provides an online estimate. The final price will be determined onsite by our staff. The price for heavy material, such as dirt, gravel, roofing material, and concrete, cannot be estimated with this tool as this material is charged by the bed load.</p>
             <h3>Step 3: BOOK ONLINE & Save $20 or Call <a href="tel: 18888885865"> 1-888-888-JUNK (5865)</a></h3>
         </div>

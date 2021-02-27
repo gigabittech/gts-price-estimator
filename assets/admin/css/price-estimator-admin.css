@@ -3,4 +3,18 @@
  * included in this file.
  */
 
+.postbox {
+    position: relative;
+    width: 80%;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
+    background: #fff;
+    padding: 50px 30px;
+}
  
+ .cmshortcodetextarea {
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    margin: 10px;
+}

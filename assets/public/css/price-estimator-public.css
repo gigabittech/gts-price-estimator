@@ -296,6 +296,28 @@ figcaption {
 	color: #fff;
 }
 
+li.junk-items {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #f2f2f2;
+    margin-bottom: 10px;
+}
+
+li.junk-items span {
+    line-height: 40px;
+    padding: 14px;
+}
+
+button.junk-item-btn {
+    float: right;
+}
+
+.alert-message h4 {
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
+    color: red;
+}
 
 /* modals css start */
 
@@ -336,8 +358,6 @@ h4#exampleModalLabel{
 
 
 /* modals css end */
-
-
 @media only screen and (max-width: 992px) {
   .icon-box {
     margin-right: 0px;

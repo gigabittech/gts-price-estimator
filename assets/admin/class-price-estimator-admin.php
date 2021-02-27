@@ -223,19 +223,33 @@ function create_topics_nonhierarchical_taxonomy() {
 
         <div class="wrap">
             <h2>Popup Setting</h2>
-
-
-            <?php settings_errors(); ?>
-            <form method="post" action="options.php">
-                <?php
-                    settings_fields( 'popup_setting_option_group' );
-                    do_settings_sections( 'popup-setting-admin' );
-                    submit_button();
-                ?>
-            </form>
+            <?php settings_errors(); ?>                        
+            <div class="postbox">
+                <div class="price-estimator-option">
+                    <div class="my-plugin-option">
+                        <h4>You can use the shortcode on your post, pages and text widgets.</h4>
+                        <textarea class="cmshortcodetextarea" id="cmsctxt" spellcheck="false">[price_estimator]</textarea>
+                        
+                        <div class="cmshowcase_buttons_area">
+                            <span class="howto">You can use the full shortcode above directly on your page, but if you prefer you can save it, giving it an Alias instead, so you have a shorter version of the shortcode that you can load and edit in the future. The Alias name should be short and unique.</span>
+                        </div>
+                    </div>
+                    <div class="other-form-option" style="margin-top: 40px;">
+                        <h4>Using Fluent Form Shortcode</h4>
+                        <span class="howto">Follw bellow example.</span>
+                        <textarea cols="30" rows="8" class="cmshortcodetextarea" id="cmsctxt">[fluentform_modal form_id="1" btn_text="Book It" css_class="custom-class"]</textarea>
+                        <form method="post" action="options.php">
+                            <?php
+                            settings_fields( 'popup_setting_option_group' );
+                            do_settings_sections( 'popup-setting-admin' );
+                            submit_button();
+                            ?>
+                        </form>
+                    </div>                    
+                </div>
+            </div>
         </div>
     <?php }
-
     public function popup_setting_page_init() {
         register_setting(
             'popup_setting_option_group', // option_group
@@ -252,7 +266,7 @@ function create_topics_nonhierarchical_taxonomy() {
 
         add_settings_field(
             'price_estimate_form_class_id', // id
-            'Elementor popup Class/Id', // title
+            'Fluent Form Popup Shortcode:', // title
             array( $this, 'price_estimate_form_class_id_callback' ), // callback
             'popup-setting-admin', // page
             'popup_setting_setting_section' // section
@@ -277,6 +291,6 @@ function create_topics_nonhierarchical_taxonomy() {
             isset( $this->popup_setting_options['price_estimate_form_class_id'] ) ? esc_attr( $this->popup_setting_options['price_estimate_form_class_id']) : ''
         );
     }
-
+ 
 
 }

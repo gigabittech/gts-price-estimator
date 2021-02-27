@@ -1,25 +1,4 @@
-// Próximo passo: Ao carregar a página, alterar o status dos botões de acordo com o valor
-// do atributo data-kart-item-status.
-
-/*!
- * Shopkart.js v0.3.3
- * Copyright 2018
- * Original author: Eduardo Vinicius Micami
- * Email eduvnsm@gmail.com
- * Version: 1.0.0
- * Licensed MIT
- */
-
-// the semi-colon before the function invocation is a safety net against concatenated
-// scripts and/or other plugins that are not closed properly.
-;+function ($, window, undefined) {
-
-    /**
-     * Detects whether localStorage is both supported and available.
-     * https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#Testing_for_availability
-     * @param  {string} type
-     * @return {boolean}
-     */
+;+function ($, window, undefined) {    
     function storageAvailable(type) {
         try {
             var storage = window[type],
@@ -274,7 +253,7 @@
         };
 
         var getTotalPrice = function () {
-            return totalPrice;
+            return 'Total Price: $' + totalPrice;
         }
 
         var addTotalPrice = function (price) {
