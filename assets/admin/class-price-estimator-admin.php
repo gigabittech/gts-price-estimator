@@ -108,17 +108,15 @@ public function price_estimator() {
 
     $labels = array(
         'name'                  => _x( 'Price Estimator', 'Post Type General Name', 'text_domain' ),
-        'singular_name'         => _x( 'Price Estimator', 'Post Type Singular Name', 'text_domain' ),
-        'menu_name'             => __( 'Price Estimator', 'text_domain' ),
-       	'name_admin_bar'        => __( 'Price Estimator', 'text_domain' ),  
-        'all_items'             => __( 'All Items', 'text_domain' ),
+        //'singular_name'         => _x( 'Price Estimator', 'Post Type Singular Name', 'text_domain' ),        
+		'menu_name'             => __( 'Price Estimator', 'text_domain' ),
+       	'name_admin_bar'        => __( 'Price Estimator', 'text_domain' ),       			
         'add_new_item'          => __( 'Add New Item', 'text_domain' ),
         'add_new'               => __( 'Add New', 'text_domain' ),
-        'new_item'              => __( 'New Item', 'text_domain' ),
-        'edit_item'             => __( 'Edit Item', 'text_domain' ),
+        'new_item'              => __( 'New Item', 'text_domain' ),        
         'update_item'           => __( 'Update Item', 'text_domain' ),
         'view_item'             => __( 'View Item', 'text_domain' ),
-        'view_items'            => __( 'View Items', 'text_domain' ),
+        'view_items'            => __( 'View Items', 'text_domain' ),       
         'search_items'          => __( 'Search Item', 'text_domain' ),
         'not_found'             => __( 'Not found', 'text_domain' ),
         'not_found_in_trash'    => __( 'Not found in Trash', 'text_domain' ),        
@@ -129,7 +127,7 @@ public function price_estimator() {
         'filter_items_list'     => __( 'Filter items list', 'text_domain' ),
     );
     $args = array(        
-        'labels'                => $labels,
+        'labels'                => $labels,		
         'menu_icon'				=> __('dashicons-money-alt', 'text_domain'),
         'taxonomies'         => array( 'price_estimator_cat', 'post_tag' ),
         'supports' => array(
@@ -138,7 +136,10 @@ public function price_estimator() {
             'thumbnail',
             'custom-fields',
             'excerpt'
-        ),        
+        ),
+		'capabilities' => array(
+		'create_posts' => 'do_not_allow',		
+	  	),
         'public'                => true,
         'show_ui'               => true,
         'show_in_menu'          => true,
@@ -148,6 +149,7 @@ public function price_estimator() {
         'can_export'            => true,
         'has_archive'           => false,        
         'publicly_queryable'    => false,
+		'all_items' => false,
         'capability_type'       => 'page',        
     );
     register_post_type( 'price-estimator', $args );
@@ -157,8 +159,8 @@ public function price_estimator() {
 
 function price_estimator_taxonomy() {
   $labels = array(
-    'name'              => _x( 'Item Categories', 'taxonomy general name' ),
-    'singular_name'     => _x( 'Item Category', 'taxonomy singular name' ),
+    'name'              => _x( 'Items & Prices', 'taxonomy general name' ),
+    'singular_name'     => _x( 'Item & Price', 'taxonomy singular name' ),
     'search_items'      => __( 'Search Item Categories' ),
     'all_items'         => __( 'All Item Categories' ),
     'parent_item'       => __( 'Parent Item Category' ),
@@ -167,7 +169,7 @@ function price_estimator_taxonomy() {
     'update_item'       => __( 'Update Item Category' ),
     'add_new_item'      => __( 'Add New Item Category' ),
     'new_item_name'     => __( 'New Item Category' ),
-    'menu_name'         => __( 'Item Categories' ),
+    'menu_name'         => __( 'Items & Prices' ),
     
   );
   $args = array(

@@ -133,14 +133,17 @@ public function price_estimator_shortcode($args) {
             </div>
             <div class="col-lg-4 col-md-6">
                  <div class="alert-message" style="display: none;">
-                     <h4>Please enter valid zip code.</h6>
-                 </div> 
+                     <h4>Sorry, we don't serve in your area!</h6>
+                 </div>
+                 <div class="alert-success-message" style="display: none;">
+                     <h4>Yay, we serve in your area!</h6>
+                 </div>
             </div>
-            <div class="col-lg-10 pt-5 pb-5">
+            <div class="col-lg-8 pt-5 pb-5">
                 <h3 class="step-2">Step 2: Click on your items for a free estimate</h3>
             </div>
-            <div class="col-lg-2 pt-5 pb-5">
-                <div class="card-body" data-kart="display">
+            <div class="col-lg-4 pt-5 pb-5">
+                <div class="show-price" data-kart="display">
                     <div><span data-kart-total-price="0"></span>
                     </div>
                 </div>

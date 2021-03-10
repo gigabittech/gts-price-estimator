@@ -319,6 +319,22 @@ button.junk-item-btn {
     color: red;
 }
 
+.alert-success-message h4 {
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
+    color: green;
+}
+
+.show-price{
+    text-align: right;
+}
+.show-price span {
+    color: red;
+    font-size: 24px;
+    font-weight: 700;
+}
+
 /* modals css start */
 
 .modal-header{

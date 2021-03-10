@@ -13,17 +13,20 @@
         if (code == validcode[i]) {
           $(".junk-items").show();
           $(".booking-form").show();
+          $(".alert-success-message").show();
           $(".alert-message").hide();
           //$('.zip_code').val(code);
-          $('input[name="zip_code"]').val(code)
+          $('input[name="price_estimate_zip_code"]').val(code)
           break;
         } else if (code != validcode[i]) {
-          $(".alert-message").show();
+          $(".alert-message").show();          
           $(".junk-items").hide();
           $(".booking-form").hide();
+          $(".alert-success-message").hide();
         } else {
-          $(".junk-items").hide();
+          $(".junk-items").hide();          
           $(".booking-form").hide();
+          $(".alert-success-message").hide();
           $(".alert-message").hide();
         }
       }
