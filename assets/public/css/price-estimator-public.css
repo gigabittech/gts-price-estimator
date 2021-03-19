@@ -219,7 +219,7 @@ figcaption {
 }
 
 .pricing h3{
-	font-size: 32px;
+	font-size: 30px;
 	font-weight: 700;
 	color: #333;
 }
@@ -448,4 +448,109 @@ h4#exampleModalLabel{
 	margin-top: 0;
 }
 
+}
+
+/*Truck Load CSS*/
+.minus-btn img , .plus-btn img {
+    width: 26px;
+    height: auto;
+}
+
+img.main-truck {
+    position: relative;
+    padding: 50px;
+}
+
+.row.inner-shadow{
+}
+
+.jk-truck-bg{
+    background: #f6f6f6;
+    box-shadow: inset 0px 11px 8px -10px #ccc, inset 0px -11px 8px -10px #ccc;
+}
+div#truckload {
+    position: absolute;
+    height: 64px;
+    top: 58px;
+    left: 47%;
+    width: 160px;
+}
+.truck-ball{
+   height: 100%;
+   border-radius: 0;
+   padding: 0;
+}
+
+div#truckload input[type=range]{
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+}
+
+
+
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 100%;
+      -webkit-appearance: none;
+      background-color: #9a905d;
+    }
+    
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: red !important;
+      margin-top: -1px;
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.6px;
+    cursor: pointer;
+    box-shadow: unset;
+    background: transparent;
+    border-radius: 13.6px;
+    border: 0 solid #fff;
+}
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 0px;
+      -webkit-appearance: none;
+      height: 0px;
+      cursor: ew-resize;
+      background: unset;
+      box-shadow: -80px 0 0 80px;
+      border: unset;
+    }
+
+}
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-moz-range-track {  
+  background-color: #9a905d;
+}
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7; 
+}
+input[type="range"]::-ms-fill-upper {  
+  background-color: #9a905d;
+}
+
+input[type=range]::range-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: red;
+  border: 2px solid #1976D2;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+.truckload {
+    background: #f6f6f6;
+    padding: 50px;
 }

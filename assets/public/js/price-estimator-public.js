@@ -45,4 +45,52 @@
   renderCart(cartLS.list())
   cartLS.onChange(renderCart)
 
+
+var counter = document.getElementById("points").value;
+
+$(document).ready(function () {
+       
+    $("#plus").click(function(){
+        
+        var newValuePlus = parseInt($("#points").val()) + 20;
+        if ( newValuePlus > 100 ) return;
+        
+        $("#points").val(newValuePlus);
+        
+    });
+    
+    
+    $("#minus").click(function(){
+        
+        var newValueMinus = parseInt($("#points").val()) - 20;
+        if ( newValueMinus < 0 ) return;
+        
+        $("#points").val(newValueMinus);
+    });
+
+
+
+    $("#plus").click(function(){
+        
+        var newValuePlus = parseInt($("#textnumber").val()) + 160;
+        if ( newValuePlus > 800 ) return;
+        
+        $("#textnumber").val(newValuePlus);
+        
+    });
+    
+    
+    $("#minus").click(function(){
+        
+        var newValueMinus = parseInt($("#textnumber").val()) - 160;
+        if ( newValueMinus < 0 ) return;
+        
+        $("#textnumber").val(newValueMinus);
+    }); 
+    
+});
+
+
+
+
 })(jQuery);
