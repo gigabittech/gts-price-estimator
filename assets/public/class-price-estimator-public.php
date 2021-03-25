@@ -201,14 +201,18 @@ public function price_estimator_shortcode($args) {
                                             <input type="number" name="phone_number" class="form-control" id="phone_number" placeholder="Phone Number">
                                         </div>
                                     </div>
-                                    <div class="form-group" data-kart="display">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-12" data-kart="display">
+                                        <h5 class="text-left mt-2 text-white">Price by list item</h5>
                                         <textarea rows="2" data-kart-total-price="" name="total_price">$0.00</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" name="amountInput" class="form-control textnumber" min="10" max="100" step="1" value="0" oninput="this.form.amountRange.value=this.value" />
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="price_estimate_item_name" class="cart truck-load-items" cols="30" rows="6"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <h5 class="text-left mt-2 text-white">Price by truck load</h5>
+                                            <input type="text" name="amountInput" class="form-control textnumber" min="10" max="100" step="1" value="0"/>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <textarea name="price_estimate_item_name" class="cart truck-load-items" cols="30" rows="6"></textarea>
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn">Book IT</button>
                                 </form>
@@ -257,7 +261,7 @@ public function price_estimator_shortcode($args) {
                                 <span>*</span>
                                 <span class="jk-red">1</span>
                                 <span>&nbsp;Grizly Junk Truck =&nbsp;</span>
-                                <span class="jk-red">5&nbsp;</span>
+                                <span class="jk-red">6&nbsp;</span>
                                 <span>Regular Pickup Truck Loads</span>
                                 </h6>
                             </div>
@@ -296,14 +300,14 @@ public function price_estimator_shortcode($args) {
                                     <div class="jk-truck-image text-center">
                                         <img class="main-truck" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/junk-king-truck.png'?>">
                                         <div id="truckload">
-                                            <input class="truck-ball" type="range" name="amountRange" id="points" value="0" min="10" max="100" step="1" oninput="this.form.amountInput.value=this.value" />
+                                            <input class="truck-ball" type="range" name="amountRange" id="points" value="0" min="10" max="100" step="1"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="estimate-price-show">
-                                    <h3>Your Estimate: <span>$</span><input type="text" name="amountInput" class="textnumber" min="10" max="100" step="1" value="0" oninput="this.form.amountRange.value=this.value" /></h3>
+                                    <h3>Your Estimate: <span>$</span><input type="text" name="amountInput" class="textnumber" min="10" max="100" step="1" value="0"/></h3>
                                 </div>
                             </div>
                         </div>

@@ -46,29 +46,9 @@
             `).join("")
 
      $truckload.innerHTML = items.map((item) => `
-            Item Name: ${item.name} ${item.quantity}                                   
-            `).join("")
-
-     /*$addfull.innerHTML = items.map((item) => `
-           <td style="width: 60px;">  
-              <button type="button" class="btn btn-block btn-sm btn-outline-primary"
-                onClick="truckLS.quantity(${item.id},1)">+</button>
-            </td>                               
-            `).join("")*/
-           
-          /*$removefull.innerHTML = items.map((item) => `
-           <td style="width: 60px;">  
-              <button type="button" class="btn btn-block btn-sm btn-outline-primary"
-                onClick="truckLS.quantity(${item.id},-1)">-</button>
-            </td>                               
-            `).join("")*/           
-           
-         /* $removehalf.innerHTML = items.map((item) => `
-           <td style="width: 60px;">  
-              <button type="button" id="remove-half" class="btn btn-block btn-sm btn-outline-primary"
-                onClick="truckLS.quantity(${item.id},-1)">-</button>
-            </td>                               
-            `).join("")*/  
+            Item Name: ${item.name} 
+            Quantity: ${item.quantity}                                   
+            `).join("")    
   }
   renderCart(cartLS.list())
   cartLS.onChange(renderCart)
@@ -78,48 +58,38 @@
 
 var counter = document.getElementById("points").value;
 $(document).ready(function () {
-
-    $("#add-full").click(function(){
-        
+    $("#add-full").click(function(){        
         var newValuePlus = parseInt($("#points").val()) + 15;
-        if ( newValuePlus > 100 ) return;
-        
-        $("#points").val(newValuePlus);
-        
+        if ( newValuePlus > 100 ) return;        
+        $("#points").val(newValuePlus);        
     });    
     
     $("#remove-full").click(function(){        
         var newValueMinus = parseInt($("#points").val()) - 15;
-        if ( newValueMinus < 0 ) return;
-        
+        if ( newValueMinus < 0 ) return;        
         $("#points").val(newValueMinus);
     });
 
 
-    $("#add-half").click(function(){
-        
+    $("#add-half").click(function(){        
         var newValuePlus = parseInt($("#points").val()) + 7.5;
-        if ( newValuePlus > 100 ) return;
-        
+        if ( newValuePlus > 100 ) return;        
         $("#points").val(newValuePlus);
         
     });    
     
     $("#remove-half").click(function(){        
         var newValueMinus = parseInt($("#points").val()) - 7.5;
-        if ( newValueMinus < 0 ) return;
-        
+        if ( newValueMinus < 0 ) return;        
         $("#points").val(newValueMinus);
     });
-
 
     $("#add-full").click(function(){        
         var newValuePlus = parseInt($(".textnumber").val()) + 160;
         if ( newValuePlus > 800 ) return;        
         $(".textnumber").val(newValuePlus);
         
-    });
-    
+    });    
     
     $("#remove-full").click(function(){        
         var newValueMinus = parseInt($(".textnumber").val()) - 160;
@@ -132,8 +102,7 @@ $(document).ready(function () {
         if ( newValuePlus > 800 ) return;        
         $(".textnumber").val(newValuePlus);
         
-    });
-    
+    });    
     
     $("#remove-half").click(function(){        
         var newValueMinus = parseInt($(".textnumber").val()) - 80;
