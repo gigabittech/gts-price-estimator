@@ -36,61 +36,116 @@
   
   function renderCart(items) {
     const $cart = document.querySelector(".cart")
+    const $truckload = document.querySelector(".truck-load-items")
+    //const $addfull = document.querySelector("#plus")
+    const $removefull = document.querySelector("#remove-full")
+    const $removehalf = document.querySelector("#remove-half")
     const $total = document.querySelector(".total")
     $cart.innerHTML = items.map((item) => `
-            Item Name: ${item.name}                        
+            Item Name: ${item.name}                                   
             `).join("")
 
+     $truckload.innerHTML = items.map((item) => `
+            Item Name: ${item.name} ${item.quantity}                                   
+            `).join("")
+
+     /*$addfull.innerHTML = items.map((item) => `
+           <td style="width: 60px;">  
+              <button type="button" class="btn btn-block btn-sm btn-outline-primary"
+                onClick="truckLS.quantity(${item.id},1)">+</button>
+            </td>                               
+            `).join("")*/
+           
+          /*$removefull.innerHTML = items.map((item) => `
+           <td style="width: 60px;">  
+              <button type="button" class="btn btn-block btn-sm btn-outline-primary"
+                onClick="truckLS.quantity(${item.id},-1)">-</button>
+            </td>                               
+            `).join("")*/           
+           
+         /* $removehalf.innerHTML = items.map((item) => `
+           <td style="width: 60px;">  
+              <button type="button" id="remove-half" class="btn btn-block btn-sm btn-outline-primary"
+                onClick="truckLS.quantity(${item.id},-1)">-</button>
+            </td>                               
+            `).join("")*/  
   }
   renderCart(cartLS.list())
   cartLS.onChange(renderCart)
+  renderCart(truckLS.list())
+  truckLS.onChange(renderCart)
 
 
 var counter = document.getElementById("points").value;
-
 $(document).ready(function () {
-       
-    $("#plus").click(function(){
+
+    $("#add-full").click(function(){
         
-        var newValuePlus = parseInt($("#points").val()) + 20;
+        var newValuePlus = parseInt($("#points").val()) + 15;
         if ( newValuePlus > 100 ) return;
         
         $("#points").val(newValuePlus);
         
-    });
+    });    
     
-    
-    $("#minus").click(function(){
-        
-        var newValueMinus = parseInt($("#points").val()) - 20;
+    $("#remove-full").click(function(){        
+        var newValueMinus = parseInt($("#points").val()) - 15;
         if ( newValueMinus < 0 ) return;
         
         $("#points").val(newValueMinus);
     });
 
 
+    $("#add-half").click(function(){
+        
+        var newValuePlus = parseInt($("#points").val()) + 7.5;
+        if ( newValuePlus > 100 ) return;
+        
+        $("#points").val(newValuePlus);
+        
+    });    
+    
+    $("#remove-half").click(function(){        
+        var newValueMinus = parseInt($("#points").val()) - 7.5;
+        if ( newValueMinus < 0 ) return;
+        
+        $("#points").val(newValueMinus);
+    });
 
-    $("#plus").click(function(){
-        
-        var newValuePlus = parseInt($("#textnumber").val()) + 160;
-        if ( newValuePlus > 800 ) return;
-        
-        $("#textnumber").val(newValuePlus);
+
+    $("#add-full").click(function(){        
+        var newValuePlus = parseInt($(".textnumber").val()) + 160;
+        if ( newValuePlus > 800 ) return;        
+        $(".textnumber").val(newValuePlus);
         
     });
     
     
-    $("#minus").click(function(){
+    $("#remove-full").click(function(){        
+        var newValueMinus = parseInt($(".textnumber").val()) - 160;
+        if ( newValueMinus < 0 ) return;        
+        $(".textnumber").val(newValueMinus);
+    });
+
+    $("#add-half").click(function(){        
+        var newValuePlus = parseInt($(".textnumber").val()) + 80;
+        if ( newValuePlus > 800 ) return;        
+        $(".textnumber").val(newValuePlus);
         
-        var newValueMinus = parseInt($("#textnumber").val()) - 160;
-        if ( newValueMinus < 0 ) return;
-        
-        $("#textnumber").val(newValueMinus);
+    });
+    
+    
+    $("#remove-half").click(function(){        
+        var newValueMinus = parseInt($(".textnumber").val()) - 80;
+        if ( newValueMinus < 0 ) return;        
+        $(".textnumber").val(newValueMinus);
     }); 
     
 });
 
-
+$('#reset_data').click(function() {
+    location.reload();
+});
 
 
 })(jQuery);

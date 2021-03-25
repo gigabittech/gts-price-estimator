@@ -472,7 +472,7 @@ div#truckload {
     position: absolute;
     height: 64px;
     top: 58px;
-    left: 47%;
+    left: 48%;
     width: 160px;
 }
 .truck-ball{
@@ -487,6 +487,9 @@ div#truckload input[type=range]{
     padding: 0;
 }
 
+.estimate-price-show h3 {
+    color: red;
+}
 
 
 /*Chrome*/
@@ -525,6 +528,19 @@ div#truckload input[type=range]{
       border: unset;
     }
 
+}
+
+.estimate-price-show input.textnumber {
+    background: unset;
+    border: unset;
+    margin: 0;
+    padding: 0;
+    color: red;
+}
+
+
+.estimate-price-show {
+    margin: 30px 0;
 }
 /** FF*/
 input[type="range"]::-moz-range-progress {
