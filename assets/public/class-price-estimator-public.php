@@ -254,63 +254,65 @@ public function price_estimator_shortcode($args) {
                         </div>
                     </div>              
             
-                    <div class="tab-pane fade booking-form" id="nav-profile" style="display:none;" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="row" style="background: #fff;">
-                            <div class="col-md-12 text-center">
-                                <h6>
-                                <span>*</span>
-                                <span class="jk-red">1</span>
-                                <span>&nbsp;Grizly Junk Truck =&nbsp;</span>
-                                <span class="jk-red">6&nbsp;</span>
-                                <span>Regular Pickup Truck Loads</span>
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="row" id="row-pickup-trucks">
-                            <div class="col-md-6 col-xs-6 truckload" id="pickups-full-counter">
-                                <div class="add-full-truck">
-                                    <img src="<?php echo plugin_dir_url( __FILE__ ) . 'images/pickup-truck-full.png'?>">
-                                </div>
-                                <div class="btn-group" role="group">
-                                    <a class="btn btn-xs minus-btn" class="remove-full" id="remove-full" role="button">
-                                        <img value="-" onclick="truckLS.quantity(1,-1)"src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-minus.svg'?>">
-                                    </a>
-                                    <a class="btn btn-xs plus-btn" id="">
-                                        <img class="junk-item-btn" onClick="truckLS.add({id: 1, name: 'Add Full Track', price: '0'})" value="+" id="add-full" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-solid-plus.svg'?>">
-                                    </a>
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="truck-load-section booking-form" style="display: none;">
+                            <div class="row" style="background: #fff;">
+                                <div class="col-md-12 text-center">
+                                    <h6>
+                                    <span>*</span>
+                                    <span class="jk-red">1</span>
+                                    <span>&nbsp;Grizly Junk Truck =&nbsp;</span>
+                                    <span class="jk-red">6&nbsp;</span>
+                                    <span>Regular Pickup Truck Loads</span>
+                                    </h6>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-xs-6 truckload" id="pickups-half-counter">
-                                <div class="add-half-truck">
-                                    <img src="<?php echo plugin_dir_url( __FILE__ ) . 'images/pickup-truck-half.png'?>">
+                            <div class="row" id="row-pickup-trucks">
+                                <div class="col-md-6 col-xs-6 truckload" id="pickups-full-counter">
+                                    <div class="add-full-truck">
+                                        <img src="<?php echo plugin_dir_url( __FILE__ ) . 'images/pickup-truck-full.png'?>">
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-xs minus-btn" class="remove-full" id="remove-full" role="button">
+                                            <img value="-" onclick="truckLS.quantity(1,-1)"src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-minus.svg'?>">
+                                        </a>
+                                        <a class="btn btn-xs plus-btn" id="">
+                                            <img class="junk-item-btn" onClick="truckLS.add({id: 1, name: 'Add Full Track', price: '0'})" value="+" id="add-full" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-solid-plus.svg'?>">
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="btn-group" role="group">
-                                    <a class="btn btn-xs minus-btn" id="remove-half" role="button">
-                                        <img id="" onclick="truckLS.quantity(2,-1)" value="-" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-minus.svg'?>">
-                                    </a>
-                                    <a class="btn btn-xs plus-btn" role="button">
-                                        <img id="add-half" value="+"  src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-solid-plus.svg'?>" onClick="truckLS.add({id: 2, name: 'Add Half Truck', price: '0'})">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row inner-shadow">
-                            <div class="col-md-12 jk-truck-bg">
-                                <div id="jk-truck-container">
-                                    <div class="jk-truck-image text-center">
-                                        <img class="main-truck" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/junk-king-truck.png'?>">
-                                        <div id="truckload">
-                                            <input class="truck-ball" type="range" name="amountRange" id="points" value="0" min="10" max="100" step="1"/>
-                                        </div>
+                                <div class="col-md-6 col-xs-6 truckload" id="pickups-half-counter">
+                                    <div class="add-half-truck">
+                                        <img src="<?php echo plugin_dir_url( __FILE__ ) . 'images/pickup-truck-half.png'?>">
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-xs minus-btn" id="remove-half" role="button">
+                                            <img id="" onclick="truckLS.quantity(2,-1)" value="-" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-minus.svg'?>">
+                                        </a>
+                                        <a class="btn btn-xs plus-btn" role="button">
+                                            <img id="add-half" value="+"  src="<?php echo plugin_dir_url( __FILE__ ) . 'images/ico-btn-solid-plus.svg'?>" onClick="truckLS.add({id: 2, name: 'Add Half Truck', price: '0'})">
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="estimate-price-show">
-                                    <h3>Your Estimate: <span>$</span><input type="text" name="amountInput" class="textnumber" min="10" max="100" step="1" value="0"/></h3>
+                            <div class="row inner-shadow">
+                                <div class="col-md-12 jk-truck-bg">
+                                    <div id="jk-truck-container">
+                                        <div class="jk-truck-image text-center">
+                                            <img class="main-truck" src="<?php echo plugin_dir_url( __FILE__ ) . 'images/junk-king-truck.png'?>">
+                                            <div id="truckload">
+                                                <input class="truck-ball" type="range" name="amountRange" id="points" value="0" min="10" max="100" step="1"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="estimate-price-show">
+                                        <h3>Your Estimate: <span>$</span><input type="text" name="amountInput" class="textnumber" min="10" max="100" step="1" value="0"/></h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
