@@ -212,7 +212,7 @@ function create_topics_nonhierarchical_taxonomy() {
                 'with_front'        => true 
                 )
   );
-  register_taxonomy( 'popup_option', 'price-estimator', $args );
+  register_taxonomy( 'popup_option', 'price-estimator', 'attachment', $args );
 }
     private $popup_setting_options;
     public function price_estimat_form_setting() {

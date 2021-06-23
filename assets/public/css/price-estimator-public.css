@@ -570,3 +570,308 @@ input[type=range]::range-thumb {
     background: #f6f6f6;
     padding: 50px;
 }
+
+
+a {
+    color: #64AC40;
+    transition: linear .3s;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+.nav-tabs {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.load_and_pricing_tabs_row .nav li {
+    width: 50%;
+}
+
+.nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+}
+
+
+.nav>li {
+    position: relative;
+    display: block;
+}
+
+
+
+.load_and_pricing_tabs_row .nav.nav-tabs a {
+    background: #c7c7c7;
+    margin-right: 0px;
+    border-radius: 0;
+    padding: 30px 20px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #222;
+}
+
+.load_and_pricing_tabs_row .nav.nav-tabs a.active {
+    background-color: #222222;
+    color: #fff;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    color: #555;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+}
+
+.load_and_pricing_tabs_row .tab-content {
+    border: 1px solid #ececec !important;
+    clear: both;
+    overflow: hidden;
+    padding: 20px;
+    margin-top: -1px;
+}
+
+.price-by-load .panel-default {
+    border: none;
+    box-shadow: none;
+}
+
+.panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 4px;
+}
+
+.panel-title {
+    margin: 0;
+}
+
+.price-by-load .panel-title a {
+    color: #ffffff;
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.j-list {
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.price-by-load .panel-default>.panel-heading {
+    color: #ffffff;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 15px 22px;
+    margin-bottom: 20px;
+    background: #70AB2D;
+}
+
+.j-list li {
+    width: 33.3%;
+    float: left;
+    text-align: center;
+    padding: 30px 0;
+    border-right: #ccc 1px dashed;
+}
+
+.price-by-load .j-list li figure {
+    display: inline-block;
+}
+
+.price_list img {
+    height: 30px;
+}
+
+.price-by-load .j-list li .qnt {
+    margin-top: 15px;
+}
+
+.price-by-load .j-list li .qnt input[type="text"] {
+    margin: 0 5px;
+    width: 50px;
+    text-align: center;
+    border: #ccc 1px solid;
+}
+
+.estimated {
+    background: #eaeaea;
+    padding: 30px 20px;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    border: #c7c7c7 1px dashed;
+}
+
+.estimated .price-list {
+    margin-left: 20px;
+}
+
+.estimated .price-list li {
+    float: left;
+    width: 50%;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.estimated .price {
+    text-align: center;
+    font-size: 24px;
+    margin: 30px 0;
+    text-transform: uppercase;
+    font-weight: 300;
+    display: inline-block;
+    width: 100%;
+    color: #70AB2D;
+}
+
+.estimated .price span {
+    display: inline-block;
+    width: 100%;
+    font-weight: 700;
+}
+
+.estimated a.book {
+    background: #30548E;
+    padding: 15px 25px;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 600;
+    margin: 15px 0;
+}
+
+.estimated a.book:hover {
+    background: #70AB2D;
+}
+
+.estimated .call {
+    font-size: 24px;
+    font-weight: 700;
+    color: #30548E;
+    margin: 15px 0;
+}
+
+.price.custom_price span {
+    display: inline !important;
+}
+
+.single_price {
+    font-weight: bold;
+}
+
+.load_and_pricing_tabs_row ul.price {
+    margin: 0px 8px;
+    position: relative;
+    z-index: 999
+}
+
+.single_load_pricings li {
+    cursor: pointer;
+}
+
+ul.price li {
+    background: #30548e;
+    color: #ffffff;
+    float: left;
+    font-size: 24px;
+    padding: 25px 0;
+    border-radius: 50%;
+    position: relative;
+    margin-right: 30px;
+}
+
+ul.price li:hover,
+ul.price li.active {
+    background: #70AB2D;
+}
+
+.load_and_pricing_tabs_row ul.price li {
+    height: 155px;
+    width: 155px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.load_and_pricing_tabs_row ul.price li::after {
+    height: 175px;
+    width: 175px;
+}
+
+ul.price li::after {
+    content: " ";
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    border: #30548e 1px solid;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+}
+
+ul.price li:hover::after,
+ul.price li.active::after {
+    border: #70AB2D 1px solid;
+}
+
+.display_table {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.vertical_align {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 4px;
+}
+
+.priceing_title {
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.priceing_content {
+    font-size: 15px;
+    margin-top: 12px;
+}
+
+h4.panel-title {
+    margin: 0;
+}
+
+.price.custom_price h3 {
+    margin-bottom: 11px;
+}
+
+.price.custom_price span {
+    font-weight: 600;
+    font-size: 24px;
+}
