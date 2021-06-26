@@ -224,7 +224,19 @@ ul {
 .estimated a.book:hover {
     background: #79AA00;
 }
-
+button.book {
+    background: #79AA00;
+    padding: 15px 25px;
+    display: inline-block;
+    color: #ffffff;
+    font-size: 16px;
+    text-transform: capitalize;
+    font-weight: 600;
+    margin: 15px 0;
+}
+button.book:hover {
+    background: #79AA00;
+}
 .estimated .call {
     font-size: 24px;
     font-weight: 700;

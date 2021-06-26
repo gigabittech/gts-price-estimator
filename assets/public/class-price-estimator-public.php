@@ -158,18 +158,24 @@ public function price_estimator_shortcode($args) {
 
                                                             <?php $subterms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false,'parent'=> $term->term_id));
                                                                 foreach ($subterms as $key => $value)
-                                                                {?>
-                                                            <li class="<?php echo $value->slug;?> price_list ">
+                                                                {?>            
+                                                            <?php $estimate_price = $value->description;
+
+                                                            $start_end_price = (explode("-",$estimate_price));
+                                                            ?>
+                                                              <li class="<?php echo $value->slug;?> price_list ">
                                                                 <!-- <figure><img src="images/couch.png">
-                                                                </figure> --> 
-                                                            <span><?php echo $value->name;?></span>
+                                                                </figure> -->
+                                                                <span><?php echo $value->name;?></span>
                                                                 <div class="qnt">
-                                                                    <a href="javascript:void(0)"><i onclick="cartLS.quantity(<?php echo $value->term_id;?>,-1)"
-                                                                            class="fa fa-minus"></i></a>
+                                                                    <a href="javascript:void(0)" class="dec"><i onclick="cartLS.quantity(<?php echo $value->term_id;?>,-1)"
+                                                                            class="fa fa-minus" data-start="<?php echo $start_end_price[0];?>" data-end="<?php echo $start_end_price[1];?>" ></i></a>
                                                                     <input type="text" class="product_qty_amount"
-                                                                        disabled="" value="0" data-volume-index="<?php echo $value->description;?>"
+                                                                        disabled="" value="0" 
                                                                         data-id="<?php echo $term->slug;?>">
-                                                                    <a href="javascript:void(0)"><i onClick="cartLS.add({id: <?php echo $value->term_id;?>, name: '<?php echo $value->name;?>', price: <?php echo $value->description;?>})" id="<?php echo $value->slug;?>" class="fa fa-plus"></i></a>
+                                                                    <a href="javascript:void(0)" class="inc"><i
+                                                                            class="fa fa-plus" data-start="<?php echo $start_end_price[0];?>" data-end="<?php echo $start_end_price[1];?>" onClick="cartLS.add({id: <?php echo $value->term_id;?>, name: '<?php echo $value->name;?>', price: <?php echo $value->description;?>})" id="<?php echo $value->slug;?>"></i></a>
+
                                                                 </div>
                                                             </li>
                                                             <?php }?>
@@ -184,15 +190,9 @@ public function price_estimator_shortcode($args) {
 
                                 <div class="col-md-4 padding-right0">
                                     <div class="estimated estimate_price set_sidebar_qty_and_estimate_price">
-
-                                        <ul class="price-list">
-                                            <?php $terms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false, ));
-                                            foreach ( $terms as $term ) {
-                                            if ($term->parent == 0 ) {?>
-                                            <li><?php echo $term->name;?>: <span class="<?php echo $term->slug;?>">0</span></li>
-                                            <?php }}?>
+                                        <ul class="price-list cart">
+                                            
                                         </ul>
-
                                         <div class="price custom_price">
                                             <div>Estimated Price</div>
                                             <div style="margin-top:10px;">
@@ -356,9 +356,6 @@ public function price_estimator_shortcode($args) {
                                             </ul>
                                         </div>
                                     </div>
-
-
-
                                 </div>
                                 <!-- Left Bar -->
 
@@ -407,12 +404,7 @@ public function price_estimator_shortcode($args) {
 
 
 
-                                <div class="col-sm-12 pt-5">
-                                    <!--<p class="margin20">
-                                        Therefore, when you compare our trucks with our competitors, our trucks are approximately  <span style="color:#ff7f00">25% larger</span>!
-                                        </p>
-                                        <p>Keep in mind, you only pay according to how much you fill the truck.   </p>-->
-
+                                <div class="col-sm-12 pt-5"> 
                                     <div class="tab-2-cont">
                                         <div class="tab-head">Our trucks are <span>25% larger</span> than our
                                             competitors trucks!</div>
@@ -436,10 +428,7 @@ public function price_estimator_shortcode($args) {
         </div>
     </div>
 
-
-
     <!-- modal -->
-
     <div class="modal fade" id="price_form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -492,15 +481,11 @@ public function price_estimator_shortcode($args) {
             </div>
         </div>
     </div>
-
-
-
 </section>
 <!-- Pricing Area End -->
 <?php
     wp_reset_query();
 }
-
 public function register_shortcodes(){
   add_shortcode( 'price_estimator', array( $this, 'price_estimator_shortcode') );
 }
