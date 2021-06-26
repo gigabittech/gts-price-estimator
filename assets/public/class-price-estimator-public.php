@@ -99,8 +99,7 @@ class Price_Estimator_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'bootstrap-min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, true );
-		/*wp_enqueue_script( 'shopkart', plugin_dir_url( __FILE__ ) . 'js/shopkart.js', array( 'jquery' ), $this->version, true );*/
+		wp_enqueue_script( 'bootstrap-min', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js', array( 'jquery' ), $this->version, true );		
         wp_enqueue_script( 'cart-localstorage', plugin_dir_url( __FILE__ ) . 'js/cart-localstorage.min.js', array( 'jquery' ), $this->version, true );
 		wp_enqueue_script( "price-estimator-public", plugin_dir_url( __FILE__ ) . 'js/price-estimator-public.js', array( 'jquery' ), $this->version, true );
         wp_enqueue_script( "new-estimate", plugin_dir_url( __FILE__ ) . 'js/new-estimate.js', array( 'jquery' ), $this->version, true );
@@ -115,35 +114,6 @@ public function price_estimator_shortcode($args) {
 <section class="pricing">
     <div class="inner-cont pad-b-30 pad-t-30 priceing_calculation">
         <div class="container">
-            <div class="row" style="margin-bottom: 40px;">
-            <div class="col-lg-4 col-md-4">
-                <h3 class="step-1">Enter your zip code</h3>
-            </div>
-            <div class="col-lg-4 col-md-6">                              
-                <form>
-                    <div class="form-row">
-                        <form method="post" id="myForm">
-                            <div class="col-auto">
-                                <input id="pe-zip-input" class="form-control mb-2 zipcode_1 postal-code" type="text" value="" maxlength="7" placeholder="92656">
-                            </div>
-                            <div class="col-auto">
-                                <button id="pe-zip-submit-btn" type="button" name="submit" class="btn btn-primary mb-2" value="Go">Go</button>
-                            </div>
-                        </form>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-4 col-md-4">
-                <div class="alert-message" style="display: none;">
-                    <h4>Sorry, we don't serve in your area!
-                    </h4>
-                </div>
-                <div class="alert-success-message" style="display: none;">
-                    <h4>Yay, we serve in your area!
-                    </h4>
-                </div>
-            </div>
-        </div>
             <div class="load_and_pricing_tabs_row">
 
                 <div class="load_and_pricing_tabs">
@@ -164,38 +134,35 @@ public function price_estimator_shortcode($args) {
                                 <div class="col-md-8 padding0">
 
                                     <div class="price-by-load">
-                                        <input type="hidden" name="price_by_load_total_price"
-                                            class="price_by_load_total_start_price" value="65">
-                                        <input type="hidden" name="price_by_load_total_price"
-                                            class="price_by_load_total_end_price" value="95">
-                                        <div class="panel-group get_all_qty_text_value" id="accordion" role="tablist"
-                                            aria-multiselectable="true">
-                                            <?php $terms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false, ));                            
-                            foreach ( $terms as $term ) {
-                            if ($term->parent == 0 ) {?>
+
+                                        <div class="panel-group get_all_qty_text_value accordion" id="accordion"
+                                            role="tablist" aria-multiselectable="true">
+
+                                            <?php $terms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false, ));
+                                                foreach ( $terms as $term ) {
+                                                if ($term->parent == 0 ) {?>
                                             <div class="panel panel-default">
-                                                <div class="panel-heading" role="tab" id="headingOne">
-                                                    <h4 class="panel-title">
-                                                        <a role="button" data-toggle="collapse" data-parent="#accordion"
-                                                            href="#<?php echo $term->slug;?>" aria-expanded="false"
-                                                            aria-controls="<?php echo $term->slug;?>" class="collapsed">
+                                                <div class="panel-heading" id="headingOne">
+                                                    <h2 class="panel-title">
+                                                        <button type="button" data-toggle="collapse"
+                                                            data-target="#<?php echo $term->slug;?>" aria-expanded="true"
+                                                            aria-controls="<?php echo $term->slug;?>">
                                                             <?php echo $term->name;?>
-                                                        </a>
-                                                    </h4>
+                                                        </button>
+                                                    </h2>
                                                 </div>
-                                                <div id="<?php echo $term->slug;?>" class="panel-collapse collapse" role="tabpanel"
-                                                    aria-labelledby="headingOne" aria-expanded="false"
-                                                    style="height: 0px;">
+                                                <div id="<?php echo $term->slug;?>" class="collapse show" aria-labelledby="headingOne"
+                                                    data-parent="#accordion">
                                                     <div class="panel-body">
-                                                        <ul class="j-list <?php echo $term->slug; echo '_prices'?> all_price_list junk-items" style="display:none;">
+                                                        <ul class="j-list <?php echo $term->slug; echo '_prices'?> all_price_list">
 
                                                             <?php $subterms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false,'parent'=> $term->term_id));
-                                        foreach ($subterms as $key => $value)
-                                        {?>
+                                                                foreach ($subterms as $key => $value)
+                                                                {?>
                                                             <li class="<?php echo $value->slug;?> price_list ">
-                                                                <!-- <figure><img src="">
-                                                                </figure> -->
-                                                                <span><?php echo $value->name;?></span>
+                                                                <!-- <figure><img src="images/couch.png">
+                                                                </figure> --> 
+                                                            <span><?php echo $value->name;?></span>
                                                                 <div class="qnt">
                                                                     <a href="javascript:void(0)"><i onclick="cartLS.quantity(<?php echo $value->term_id;?>,-1)"
                                                                             class="fa fa-minus"></i></a>
@@ -206,20 +173,18 @@ public function price_estimator_shortcode($args) {
                                                                 </div>
                                                             </li>
                                                             <?php }?>
-                                                            
                                                         </ul>
                                                     </div>
                                                 </div>
-                                            </div> 
+                                            </div>
                                             <?php }}?>
                                         </div>
-
                                     </div>
-
-
                                 </div>
+
                                 <div class="col-md-4 padding-right0">
                                     <div class="estimated estimate_price set_sidebar_qty_and_estimate_price">
+
                                         <ul class="price-list">
                                             <?php $terms = get_terms(array('taxonomy'=> 'price_estimator_cat','hide_empty' => false, ));
                                             foreach ( $terms as $term ) {
@@ -227,6 +192,7 @@ public function price_estimator_shortcode($args) {
                                             <li><?php echo $term->name;?>: <span class="<?php echo $term->slug;?>">0</span></li>
                                             <?php }}?>
                                         </ul>
+
                                         <div class="price custom_price">
                                             <div>Estimated Price</div>
                                             <div style="margin-top:10px;">
@@ -239,31 +205,22 @@ public function price_estimator_shortcode($args) {
 
                                         <small>This is an estimate only and includes the $30 discount. Our truck team
                                             will give you a free, no-obligation price at your location.</small>
-
                                         <div class="clearfix"></div>
-
-                                        <!-- <a href="javascript:void(0)" class="book save_volume_data_on_db"
-                                            data-toggle="modal" data-target="#price_form">BOOK ONLINE</a> -->
-                                            <br>
-                                            <div class="booking-form" style="display:none;">
+                                        <br>
+                                            <div class="booking-form">
                                                     <?php if (!empty($popup_class_id)){?>
                                                     <?php echo do_shortcode($popup_class_id); ?>
                                                     
                                                     <?php } else{?>
-                                                    <button class="" type="button" data-toggle="modal" data-target="#price_form">Book It</button>
+                                                    <button class="" type="button" data-toggle="modal" data-target="#price_form">BOOK ONLINE</button>
                                                     <?php }?>
                                             </div>
-
                                         <br>
                                         <a href="javascript:void(0)" id="reset_data" onClick="cartLS.destroy()" class="reset_data reset_options_data"
                                             style="color:red"><b>Reset Options</b></a>
                                         <div class="clearfix"></div>
                                         or call
-
                                         <div class="call"><a href="tel:7143090201">(714) 309-0201</a></div>
-
-                                        <small>Want to describe your needs in more detail? Get a custom quote.</small>
-
                                     </div>
                                 </div>
                             </div>
@@ -274,16 +231,14 @@ public function price_estimator_shortcode($args) {
 
                                 <div class="col-sm-12">
                                     <div>
-                                        <p>* 1  Grizly Junk Truck =  6  Regular Pickup Truck Loads</p>
-                                    </div>                                   
+                                       * 1 Grizly Junk Truck = 6 Regular Pickup Truck Loads
+                                    </div>
                                 </div>
 
                                 <!-- Left Bar -->
                                 <div class="col-md-8 col-xs-12 com-sm-12 padding0">
-
                                     <div class="clearfix"></div>
-
-                                    <div class="box_type_container booking-form" style="display: none;">
+                                    <div class="box_type_container">
                                         <div>
                                             <ul class="price single_load_pricings">
                                                 <li class="active">
@@ -427,32 +382,31 @@ public function price_estimator_shortcode($args) {
 
                                         <div class="clearfix"></div>
 
-                                        <!-- <a href="javascript:void(0)" class="book save_volume_data_on_db"
-                                            data-toggle="modal" data-target="#price_form">BOOK ONLINE</a> -->
-                                            <br>
-                                            <div class="booking-form" style="display:none;">
+                                       <br>
+                                            <div class="booking-form">
                                                 <?php if (!empty($popup_class_id)){?>
                                                 <?php echo do_shortcode($popup_class_id); ?>
                                                 
                                                 <?php } else{?>
-                                                <button class="" type="button" data-toggle="modal" data-target="#price_form">Book It</button>
+                                                <button class="" type="button" data-toggle="modal" data-target="#price_form">BOOK ONLINE</button>
                                                 <?php }?>
                                             </div>
-
-                                            <br>
+                                        <br>
                                         <a href="javascript:void(0)" id="reset_data" onClick="cartLS.destroy()" class="reset_single_options_data"
                                             style="color:red"><b>Reset Options</b></a>
                                         <div class="clearfix"></div>
                                         or call
 
-                                        <div class="call"><a href="tel:7143090201">(714) 309-0201</a></div>
-
+                                         <div class="call"><a href="tel:7143090201">(714) 309-0201</a></div>
                                         <small>Prices shown here are a rough estimate and include the $30 discount.Want
                                             to describe your needs in more detail? Get a custom quote.</small>
                                     </div>
                                 </div>
 
                                 <!-- Right Bar -->
+
+
+
                                 <div class="col-sm-12 pt-5">
                                     <!--<p class="margin20">
                                         Therefore, when you compare our trucks with our competitors, our trucks are approximately  <span style="color:#ff7f00">25% larger</span>!
@@ -539,7 +493,6 @@ public function price_estimator_shortcode($args) {
         </div>
     </div>
 
-    <!-- modal end -->
 
 
 </section>

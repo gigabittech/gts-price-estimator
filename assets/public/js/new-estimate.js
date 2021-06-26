@@ -30,7 +30,7 @@ jQuery(function($){
 			/* 92620 */
 			var price_obj={
 				//0: { End: 99, Start: 79 },
-				0: { End: 20, Start: 10 },
+				/*0: { End: 20, Start: 10 },
 				1: { End: 20, Start: 10},
 				2: { End: 80, Start: 60},
 				3: { End: 75, Start: 65},
@@ -48,7 +48,20 @@ jQuery(function($){
 				15:{ End: 120, Start: 90},
 				16:{ End: 150, Start: 90},
 				17:{ End: 120, Start: 95},
-				18:{ End: 165, Start: 240},				
+				18:{ End: 165, Start: 240},*/
+				0: { End: 115, Start: 85 },
+				1: { End: 168, Start: 99},
+				2: { End: 228, Start: 168},
+				3: { End: 278, Start: 228},
+				4: { End: 328, Start: 278},
+				5: { End: 368, Start: 328},
+				6: { End: 398, Start: 368},
+				7: { End: 438, Start: 398},
+				8: { End: 468, Start: 438},
+				9: { End: 498, Start: 468},
+				10:{ End: 538, Start: 498},
+				11:{ End: 558, Start: 538},
+				12:{ End: 588, Start: 558},				
 				
 			}
 			price_obj[price_index]['Start'] -= 0;
@@ -60,9 +73,9 @@ jQuery(function($){
 		class_by_volume : function(class_index){
 			var volume_rates={
 				0:0.1,
-				1:0.1,
-				2:0.2,
-				3:0.3,
+				1:0.082,
+				2:0.041,
+				3:0.0864,
 				4:0.063,
 				5:0.0189,
 				6:0.0432,
@@ -71,7 +84,7 @@ jQuery(function($){
 				9:0.0126,
 				10:0.0164,
 				11:0.0225,
-				12:0.19,
+				12:0.249,
 				13:0.0276,
 				14:0.0166,
 				15:0.0136
